@@ -25,13 +25,13 @@ interface ProjectedPin {
   isActive: boolean;
 }
 
-// Stage keyframes matching the exact page sections
+// Stage keyframes matching the exact page sections with mobile-first vertical separation
 interface StageKeyframe {
   id: string;
   componentId: string | null;
   camDist: number;
   posX: (isMob: boolean, isTablet: boolean) => number;
-  posY: number;
+  posY: (isMob: boolean) => number;
   posZ: number;
   rotX: number;
   rotY: number;
@@ -45,7 +45,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: null,
     camDist: 44,
     posX: (mob, tab) => (mob ? 0 : tab ? 4.2 : 6.5),
-    posY: 0,
+    posY: (mob) => (mob ? 3.8 : 0),
     posZ: 0,
     rotX: 0.12,
     rotY: -0.65,
@@ -57,7 +57,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: "drivers",
     camDist: 38,
     posX: (mob, tab) => (mob ? 0 : tab ? -4.2 : -6.2),
-    posY: -0.4,
+    posY: (mob) => (mob ? 3.6 : -0.4),
     posZ: 0,
     rotX: 0.08,
     rotY: -1.45, // Right earcup faces camera
@@ -69,7 +69,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: "cushions",
     camDist: 34,
     posX: (mob, tab) => (mob ? 0 : tab ? 3.8 : 5.5),
-    posY: -0.5,
+    posY: (mob) => (mob ? 3.6 : -0.5),
     posZ: 0,
     rotX: -0.15,
     rotY: 1.25, // Inner ear cushion faces camera
@@ -81,7 +81,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: "headband",
     camDist: 36,
     posX: (mob, tab) => (mob ? 0 : tab ? -3.8 : -5.5),
-    posY: -4.8, // Lowered so headband is centered at eye level
+    posY: (mob) => (mob ? 0.8 : -4.8), // On mobile, keep arch visible in top screen
     posZ: 0,
     rotX: 0.45, // Tilted forward to showcase unibody arch
     rotY: -0.2,
@@ -93,7 +93,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: "mic",
     camDist: 34,
     posX: (mob, tab) => (mob ? 0 : tab ? 3.6 : 5.2),
-    posY: -0.2,
+    posY: (mob) => (mob ? 3.6 : -0.2),
     posZ: 0,
     rotX: 0.05,
     rotY: -0.42, // Mic extends forward into camera view
@@ -105,7 +105,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: "controls",
     camDist: 35,
     posX: (mob, tab) => (mob ? 0 : tab ? -3.8 : -5.5),
-    posY: -0.6,
+    posY: (mob) => (mob ? 3.6 : -0.6),
     posZ: 0,
     rotX: 0.2,
     rotY: -2.6, // Rear of left earcup faces camera
@@ -117,7 +117,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     componentId: null,
     camDist: 40,
     posX: () => 0,
-    posY: 0,
+    posY: (mob) => (mob ? 3.8 : 0),
     posZ: 0,
     rotX: 0.1,
     rotY: 0.15,
@@ -144,6 +144,7 @@ export default function HeadsetExperience({
   const accentLightRef = useRef<THREE.PointLight | null>(null);
   const rimLight2Ref = useRef<THREE.DirectionalLight | null>(null);
   const floorRingRef = useRef<THREE.Mesh<THREE.RingGeometry, THREE.MeshBasicMaterial> | null>(null);
+  const shadowPlaneRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> | null>(null);
   const bodyMeshesRef = useRef<THREE.Mesh[]>([]);
   const logoMeshesRef = useRef<THREE.Mesh[]>([]);
 
@@ -204,7 +205,7 @@ export default function HeadsetExperience({
     });
   }, [wireframe]);
 
-  // Pointer Drag Handlers
+  // Pointer Drag Handlers (Horizontal drag spins, vertical drag permits scrolling)
   const handlePointerDown = (e: React.PointerEvent) => {
     isDragging.current = true;
     dragStart.current = { x: e.clientX, y: e.clientY };
@@ -249,10 +250,10 @@ export default function HeadsetExperience({
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    // Camera & Screen Adaptability
+    // Responsive Camera Frustum
     const isMobile = width < 640;
     const isTablet = width >= 640 && width < 1024;
-    const baseCamDist = isMobile ? 54 : isTablet ? 48 : 44;
+    const baseCamDist = isMobile ? 52 : isTablet ? 48 : 44;
 
     const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 500);
     camera.position.set(0, 0, baseCamDist);
@@ -324,6 +325,7 @@ export default function HeadsetExperience({
     shadowPlane.rotation.x = -Math.PI / 2;
     shadowPlane.position.y = -10.45;
     scene.add(shadowPlane);
+    shadowPlaneRef.current = shadowPlane;
 
     // Floor Ring Halo
     const ringGeo = new THREE.RingGeometry(7.0, 7.12, 64);
@@ -523,7 +525,7 @@ export default function HeadsetExperience({
       const tab = w >= 640 && w < 1024;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      camera.position.z = mob ? 54 : tab ? 48 : 44;
+      camera.position.z = mob ? 52 : tab ? 48 : 44;
       renderer.setSize(w, h);
       handleScroll();
     };
@@ -562,7 +564,7 @@ export default function HeadsetExperience({
       const w = window.innerWidth;
       const mob = w < 640;
       const tab = w >= 640 && w < 1024;
-      const baseDistOffset = mob ? 10 : tab ? 5 : 0;
+      const baseDistOffset = mob ? 8 : tab ? 4 : 0;
 
       const idx = Math.floor(sp);
       const nextIdx = Math.min(SECTION_KEYFRAMES.length - 1, idx + 1);
@@ -582,7 +584,7 @@ export default function HeadsetExperience({
 
       let targetCamZ = THREE.MathUtils.lerp(kf1.camDist, kf2.camDist, frac) + baseDistOffset;
       let targetPosX = THREE.MathUtils.lerp(rawPosX1, rawPosX2, frac) * (mob ? 1 : rtlMultiplier);
-      let targetPosY = THREE.MathUtils.lerp(kf1.posY, kf2.posY, frac);
+      let targetPosY = THREE.MathUtils.lerp(kf1.posY(mob), kf2.posY(mob), frac);
       let targetPosZ = THREE.MathUtils.lerp(kf1.posZ, kf2.posZ, frac);
       let targetRotX = THREE.MathUtils.lerp(kf1.rotX, kf2.rotX, frac);
       let targetRotY = THREE.MathUtils.lerp(kf1.rotY, kf2.rotY, frac);
@@ -591,11 +593,11 @@ export default function HeadsetExperience({
       if (autoRotate) {
         // 360 Turntable Mode
         targetPosX = 0;
-        targetPosY = 0;
+        targetPosY = mob ? 3.8 : 0;
         targetRotX = 0.1;
         targetRotY = time * 0.6;
         targetRotZ = 0;
-        targetCamZ = (mob ? 54 : tab ? 48 : 44) - 2;
+        targetCamZ = (mob ? 52 : tab ? 48 : 44) - 2;
       }
 
       // Smooth Camera Lerp
@@ -627,7 +629,14 @@ export default function HeadsetExperience({
       modelGroup.rotation.y = THREE.MathUtils.lerp(modelGroup.rotation.y, finalRotY, 0.08);
       modelGroup.rotation.z = THREE.MathUtils.lerp(modelGroup.rotation.z, finalRotZ, 0.08);
 
-      shadowPlane.position.x = modelGroup.position.x * 0.8;
+      if (shadowPlaneRef.current) {
+        shadowPlaneRef.current.position.x = modelGroup.position.x * 0.8;
+        shadowPlaneRef.current.position.y = modelGroup.position.y - 10.45;
+      }
+      if (floorRingRef.current) {
+        floorRingRef.current.position.x = modelGroup.position.x * 0.8;
+        floorRingRef.current.position.y = modelGroup.position.y - 10.44;
+      }
 
       // 5. Project 3D Hotspot Pins to Screen Space
       if (modelGroup && camera) {
@@ -685,6 +694,8 @@ export default function HeadsetExperience({
     };
   }, [onLoaded, autoRotate, activeColor, isRtl]);
 
+  const isMobileScreen = typeof window !== "undefined" && window.innerWidth < 640;
+
   return (
     <div
       ref={containerRef}
@@ -724,8 +735,8 @@ export default function HeadsetExperience({
               <span
                 className={`absolute rounded-full border transition-all duration-300 ${
                   isActive
-                    ? "w-10 h-10 scale-110 opacity-100 ring-2 ring-white/60 animate-pulse"
-                    : "w-8 h-8 opacity-60 group-hover:scale-125 group-hover:opacity-100"
+                    ? "w-9 h-9 sm:w-10 sm:h-10 scale-110 opacity-100 ring-2 ring-white/60 animate-pulse"
+                    : "w-7 h-7 sm:w-8 sm:h-8 opacity-60 group-hover:scale-125 group-hover:opacity-100"
                 }`}
                 style={{
                   borderColor: activeColor.dotHex,
@@ -736,7 +747,7 @@ export default function HeadsetExperience({
               {/* Pin Core */}
               <span
                 className={`relative flex items-center justify-center rounded-full font-bold text-white shadow-lg transition-transform ${
-                  isActive ? "w-7 h-7 text-xs scale-110 ring-2 ring-neutral-900" : "w-6 h-6 text-[10px] group-hover:scale-115"
+                  isActive ? "w-6 h-6 sm:w-7 sm:h-7 text-[11px] sm:text-xs scale-110 ring-2 ring-neutral-900" : "w-5 h-5 sm:w-6 sm:h-6 text-[9px] sm:text-[10px] group-hover:scale-115"
                 }`}
                 style={{
                   backgroundColor: activeColor.dotHex,
@@ -745,26 +756,29 @@ export default function HeadsetExperience({
                 {component.number}
               </span>
 
-              {/* Callout Tag (Adapts to RTL/LTR) */}
+              {/* Callout Tag (Adapts gracefully on mobile vs desktop) */}
               <div
                 className={`absolute ${
-                  isRtl ? "right-9 text-right" : "left-9 text-left"
-                } flex items-center gap-2 px-3 py-1.5 rounded-lg bg-neutral-900 text-white text-xs tracking-tight whitespace-nowrap shadow-xl transition-all duration-200 pointer-events-none ${
+                  isMobileScreen
+                    ? "bottom-8 left-1/2 -translate-x-1/2 text-center"
+                    : isRtl
+                    ? "right-9 text-right"
+                    : "left-9 text-left"
+                } flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-900 text-white text-[11px] tracking-tight whitespace-nowrap shadow-xl transition-all duration-200 pointer-events-none ${
                   isActive
                     ? "opacity-100 translate-x-0 ring-1 ring-white/20"
-                    : isRtl
-                    ? "opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
-                    : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                    : "opacity-0 group-hover:opacity-100"
                 }`}
                 style={{
-                  borderInlineStart: `3px solid ${activeColor.dotHex}`,
+                  borderInlineStart: isMobileScreen ? "none" : `3px solid ${activeColor.dotHex}`,
+                  borderBottom: isMobileScreen ? `2px solid ${activeColor.dotHex}` : "none",
                 }}
               >
                 <div className="flex flex-col">
                   <span className="font-semibold leading-tight">
                     {isRtl ? component.nameAr : component.name}
                   </span>
-                  <span className="text-[10px] text-neutral-400 font-normal">
+                  <span className="text-[9px] text-neutral-400 font-normal">
                     {isActive ? (isRtl ? "العرض الحالي" : "Active View") : isRtl ? "انقر للعرض" : "Click to View"}
                   </span>
                 </div>
