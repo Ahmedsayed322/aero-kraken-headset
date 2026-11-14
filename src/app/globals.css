@@ -68,11 +68,29 @@ body {
   box-shadow: 0 0 24px rgba(229, 36, 50, 0.35);
 }
 
-/* RTL Specific Styles */
+/* RTL Specific Styles & Typography Rules */
 [dir="rtl"] {
   text-align: right;
+  letter-spacing: normal !important;
+}
+
+[dir="rtl"] *,
+[dir="rtl"] *::before,
+[dir="rtl"] *::after {
+  letter-spacing: normal !important;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+  line-height: 1.38 !important;
+  letter-spacing: normal !important;
+}
+
+[dir="rtl"] p {
+  line-height: 1.75 !important;
 }
 
 [dir="rtl"] .font-display {
-  letter-spacing: 0;
+  letter-spacing: normal !important;
 }

@@ -247,13 +247,15 @@ export default function Home() {
 
           {/* Headline */}
           <h1
-            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase font-display mb-2.5 sm:mb-4 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-5 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.hero.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.hero.titleHighlight}</span> <br />
-            {t.hero.titleLine2}
+            <span className="block">{t.hero.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.hero.titleHighlight}
+            </span>
+            <span className="block mt-1 sm:mt-1.5">{t.hero.titleLine2}</span>
           </h1>
 
           {/* Description */}
@@ -316,12 +318,14 @@ export default function Home() {
             {t.sections.drivers.badge}
           </span>
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.drivers.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.drivers.titleHighlight}</span>
+            <span className="block">{t.sections.drivers.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.drivers.titleHighlight}
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-5">
             {t.sections.drivers.description}
@@ -366,12 +370,14 @@ export default function Home() {
             {t.sections.cushions.badge}
           </span>
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.cushions.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.cushions.titleHighlight}</span>
+            <span className="block">{t.sections.cushions.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.cushions.titleHighlight}
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-5">
             {t.sections.cushions.description}
@@ -416,12 +422,14 @@ export default function Home() {
             {t.sections.headband.badge}
           </span>
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.headband.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.headband.titleHighlight}</span>
+            <span className="block">{t.sections.headband.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.headband.titleHighlight}
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-5">
             {t.sections.headband.description}
@@ -466,12 +474,14 @@ export default function Home() {
             {t.sections.mic.badge}
           </span>
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.mic.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.mic.titleHighlight}</span>
+            <span className="block">{t.sections.mic.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.mic.titleHighlight}
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-5">
             {t.sections.mic.description}
@@ -516,12 +526,14 @@ export default function Home() {
             {t.sections.controls.badge}
           </span>
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.controls.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.controls.titleHighlight}</span>
+            <span className="block">{t.sections.controls.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.controls.titleHighlight}
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-5">
             {t.sections.controls.description}
@@ -567,12 +579,14 @@ export default function Home() {
           </span>
 
           <h2
-            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
-              isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
+            className={`text-2xl sm:text-4xl md:text-5xl font-extrabold sm:font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+              isRtl ? "leading-[1.38] sm:leading-[1.32] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
-            {t.sections.finale.titleLine1} <br />
-            <span style={{ color: activeColor.dotHex }}>{t.sections.finale.titleHighlight}</span>
+            <span className="block">{t.sections.finale.titleLine1}</span>
+            <span className="block mt-1 sm:mt-1.5" style={{ color: activeColor.dotHex }}>
+              {t.sections.finale.titleHighlight}
+            </span>
           </h2>
 
           <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-6">
