@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { COLOR_EDITIONS, ColorEdition } from "@/data/components";
 import { translations, Language } from "@/data/translations";
 import { sound, cyberAudio } from "@/utils/audio";
-import { ShoppingBag, Box, Play, Square, RotateCw, Check, Sparkles, X, ArrowDown, ChevronRight, ChevronLeft, Globe } from "lucide-react";
+import { ShoppingBag, Play, Square, Check, Sparkles, X, ArrowDown, ChevronRight, ChevronLeft, Globe } from "lucide-react";
 import confetti from "canvas-confetti";
 
 const HeadsetExperience = dynamic(
@@ -19,8 +19,6 @@ export default function Home() {
   const t = translations[lang];
 
   const [activeColor, setActiveColor] = useState<ColorEdition>(COLOR_EDITIONS[0]);
-  const [wireframe, setWireframe] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [isAcquireOpen, setIsAcquireOpen] = useState(false);
   const [engraving, setEngraving] = useState("CHAMPION-01");
@@ -77,8 +75,8 @@ export default function Home() {
       <HeadsetExperience
         onPinClick={scrollToSection}
         activeColor={activeColor}
-        wireframe={wireframe}
-        autoRotate={autoRotate}
+        wireframe={false}
+        autoRotate={false}
         isRtl={isRtl}
         onLoaded={() => {}}
       />
@@ -157,77 +155,33 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Floating 3D Control Center Dock */}
-      <div className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full glass-card pointer-events-auto max-w-[96vw] overflow-x-auto">
-        {/* Chroma Color Switcher */}
-        <div className="flex items-center gap-1.5 sm:gap-2 pe-2 sm:pe-3 border-e border-neutral-200 shrink-0">
-          {COLOR_EDITIONS.map((c) => {
-            const isSelected = activeColor.id === c.id;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => {
-                  sound.playClick();
-                  setActiveColor(c);
-                }}
-                onMouseEnter={() => sound.playHover()}
-                className={`relative w-6 h-6 sm:w-7 sm:h-7 rounded-full transition-all flex items-center justify-center focus:outline-none shrink-0 ${
-                  isSelected
-                    ? "ring-2 ring-neutral-900 shadow-md scale-110"
-                    : "hover:scale-105 opacity-80 hover:opacity-100"
-                }`}
-                style={{ backgroundColor: c.dotHex }}
-                title={`${t.dock.switchColorTitle} ${isRtl ? c.nameAr : c.name}`}
-              >
-                {isSelected && (
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-xs" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 360° Auto Turntable Toggle */}
-        <button
-          type="button"
-          onClick={() => {
-            sound.playClick();
-            setAutoRotate(!autoRotate);
-          }}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all focus:outline-none shrink-0 ${
-            autoRotate
-              ? "bg-neutral-900 text-white shadow-xs"
-              : "text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100"
-          }`}
-          title={t.dock.turntable}
-        >
-          <RotateCw className={`w-3.5 h-3.5 ${autoRotate ? "animate-spin" : ""}`} />
-          <span>{t.dock.turntable}</span>
-        </button>
-
-        {/* Wireframe Mesh Toggle */}
-        <button
-          type="button"
-          onClick={() => {
-            sound.playClick();
-            setWireframe(!wireframe);
-          }}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-semibold tracking-tight transition-all focus:outline-none shrink-0 ${
-            wireframe
-              ? "bg-neutral-900 text-white shadow-xs"
-              : "text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100"
-          }`}
-          title={t.dock.mesh}
-        >
-          <Box className="w-3.5 h-3.5" />
-          <span>{t.dock.mesh}</span>
-        </button>
-
-        {/* Drag Hint */}
-        <span className="hidden xl:inline text-[11px] text-neutral-400 uppercase tracking-wider ps-3 pe-1 border-s border-neutral-200 whitespace-nowrap font-medium">
-          {t.dock.dragHint}
-        </span>
+      {/* Floating 3D Chroma Color Dock */}
+      <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-2.5 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-full glass-card pointer-events-auto shadow-xl">
+        {COLOR_EDITIONS.map((c) => {
+          const isSelected = activeColor.id === c.id;
+          return (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => {
+                sound.playClick();
+                setActiveColor(c);
+              }}
+              onMouseEnter={() => sound.playHover()}
+              className={`relative w-6 h-6 sm:w-7 sm:h-7 rounded-full transition-all flex items-center justify-center focus:outline-none shrink-0 ${
+                isSelected
+                  ? "ring-2 ring-neutral-900 shadow-md scale-110"
+                  : "hover:scale-105 opacity-75 hover:opacity-100"
+              }`}
+              style={{ backgroundColor: c.dotHex }}
+              title={`${t.dock.switchColorTitle} ${isRtl ? c.nameAr : c.name}`}
+            >
+              {isSelected && (
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-xs" />
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* Stage 0: Hero Section (Model in upper screen on mobile, content in lower card) */}
