@@ -158,7 +158,7 @@ export default function Home() {
       </header>
 
       {/* Floating 3D Control Center Dock */}
-      <div className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-neutral-200/90 shadow-xl pointer-events-auto max-w-[96vw] overflow-x-auto">
+      <div className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full glass-card pointer-events-auto max-w-[96vw] overflow-x-auto">
         {/* Chroma Color Switcher */}
         <div className="flex items-center gap-1.5 sm:gap-2 pe-2 sm:pe-3 border-e border-neutral-200 shrink-0">
           {COLOR_EDITIONS.map((c) => {
@@ -235,7 +235,7 @@ export default function Home() {
         id="hero"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pt-16 sm:pt-24 pb-20 md:pb-8"
       >
-        <div className="w-full max-w-xl text-start pointer-events-auto bg-white/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 sm:p-7 md:p-0 rounded-3xl md:rounded-none border border-neutral-200/80 md:border-none shadow-xl md:shadow-none mb-2 md:mb-0">
+        <div className="w-full max-w-xl text-start pointer-events-auto glass-card md:!bg-transparent md:!backdrop-blur-none md:!border-none md:!shadow-none p-5 sm:p-7 md:p-0 rounded-3xl md:rounded-none mb-2 md:mb-0">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-[11px] sm:text-xs font-semibold tracking-tight mb-2.5 sm:mb-4 shadow-xs">
             <span
@@ -310,7 +310,7 @@ export default function Home() {
         id="section-drivers"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -332,7 +332,7 @@ export default function Home() {
           </p>
 
           {/* Clean Specification Display */}
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-200/80 mb-4 sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-300/60 mb-4 sm:mb-5">
             {t.sections.drivers.specs.map((sp, idx) => (
               <div key={idx}>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-0.5">
@@ -362,7 +362,7 @@ export default function Home() {
         id="section-cushions"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -384,7 +384,7 @@ export default function Home() {
           </p>
 
           {/* Clean Specification Display */}
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-200/80 mb-4 sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-300/60 mb-4 sm:mb-5">
             {t.sections.cushions.specs.map((sp, idx) => (
               <div key={idx}>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-0.5">
@@ -414,7 +414,7 @@ export default function Home() {
         id="section-headband"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -436,7 +436,7 @@ export default function Home() {
           </p>
 
           {/* Clean Specification Display */}
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-200/80 mb-4 sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-300/60 mb-4 sm:mb-5">
             {t.sections.headband.specs.map((sp, idx) => (
               <div key={idx}>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-0.5">
@@ -466,7 +466,7 @@ export default function Home() {
         id="section-mic"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -488,7 +488,7 @@ export default function Home() {
           </p>
 
           {/* Clean Specification Display */}
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-200/80 mb-4 sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-300/60 mb-4 sm:mb-5">
             {t.sections.mic.specs.map((sp, idx) => (
               <div key={idx}>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-0.5">
@@ -518,7 +518,7 @@ export default function Home() {
         id="section-controls"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -540,7 +540,7 @@ export default function Home() {
           </p>
 
           {/* Clean Specification Display */}
-          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-200/80 mb-4 sm:mb-5">
+          <div className="grid grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 py-3 border-y border-neutral-300/60 mb-4 sm:mb-5">
             {t.sections.controls.specs.map((sp, idx) => (
               <div key={idx}>
                 <span className="text-[10px] sm:text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-0.5">
@@ -570,7 +570,7 @@ export default function Home() {
         id="section-finale"
         className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto glass-card p-5 sm:p-7 lg:p-8 rounded-3xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
