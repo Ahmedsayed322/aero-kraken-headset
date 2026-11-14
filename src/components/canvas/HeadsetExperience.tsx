@@ -44,7 +44,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     id: "hero",
     componentId: null,
     camDist: 44,
-    posX: (mob, tab) => (mob ? 0 : tab ? 4.2 : 6.5),
+    posX: (mob, tab) => (mob ? 0 : tab ? 5.2 : 8.2),
     posY: (mob) => (mob ? 3.8 : 0),
     posZ: 0,
     rotX: 0.12,
@@ -55,8 +55,8 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 1: 50mm Acoustic Drivers
     id: "section-drivers",
     componentId: "drivers",
-    camDist: 38,
-    posX: (mob, tab) => (mob ? 0 : tab ? -4.2 : -6.2),
+    camDist: 39,
+    posX: (mob, tab) => (mob ? 0 : tab ? -5.2 : -8.2),
     posY: (mob) => (mob ? 3.6 : -0.4),
     posZ: 0,
     rotX: 0.08,
@@ -67,8 +67,8 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 2: Cooling-Gel Memory Foam Cushions
     id: "section-cushions",
     componentId: "cushions",
-    camDist: 34,
-    posX: (mob, tab) => (mob ? 0 : tab ? 3.8 : 5.5),
+    camDist: 37,
+    posX: (mob, tab) => (mob ? 0 : tab ? 5.0 : 8.0),
     posY: (mob) => (mob ? 3.6 : -0.5),
     posZ: 0,
     rotX: -0.15,
@@ -79,8 +79,8 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 3: Bauxite Aluminum Headband
     id: "section-headband",
     componentId: "headband",
-    camDist: 36,
-    posX: (mob, tab) => (mob ? 0 : tab ? -3.8 : -5.5),
+    camDist: 38,
+    posX: (mob, tab) => (mob ? 0 : tab ? -5.0 : -8.0),
     posY: (mob) => (mob ? 0.8 : -4.8), // On mobile, keep arch visible in top screen
     posZ: 0,
     rotX: 0.45, // Tilted forward to showcase unibody arch
@@ -91,8 +91,8 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 4: Retractable Cardioid Mic
     id: "section-mic",
     componentId: "mic",
-    camDist: 34,
-    posX: (mob, tab) => (mob ? 0 : tab ? 3.6 : 5.2),
+    camDist: 37,
+    posX: (mob, tab) => (mob ? 0 : tab ? 4.8 : 7.8),
     posY: (mob) => (mob ? 3.6 : -0.2),
     posZ: 0,
     rotX: 0.05,
@@ -103,8 +103,8 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 5: Tactile Hardware Controls
     id: "section-controls",
     componentId: "controls",
-    camDist: 35,
-    posX: (mob, tab) => (mob ? 0 : tab ? -3.8 : -5.5),
+    camDist: 38,
+    posX: (mob, tab) => (mob ? 0 : tab ? -5.0 : -8.0),
     posY: (mob) => (mob ? 3.6 : -0.6),
     posZ: 0,
     rotX: 0.2,
@@ -115,7 +115,7 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     // Stage 6: Tour Specification Finale
     id: "section-finale",
     componentId: null,
-    camDist: 40,
+    camDist: 44,
     posX: () => 0,
     posY: (mob) => (mob ? 3.8 : 0),
     posZ: 0,
@@ -160,6 +160,17 @@ export default function HeadsetExperience({
   const stageProgress = useRef({ current: 0, target: 0 });
   const activeComponentRef = useRef<string | null>(null);
   const animFrame = useRef<number | null>(null);
+
+  // Sync props to refs to avoid tearing down and rebuilding Three.js scene
+  const isRtlRef = useRef(isRtl);
+  useEffect(() => {
+    isRtlRef.current = isRtl;
+  }, [isRtl]);
+
+  const autoRotateRef = useRef(autoRotate);
+  useEffect(() => {
+    autoRotateRef.current = autoRotate;
+  }, [autoRotate]);
 
   // Projected 2D screen pins (Always tracked and displayed)
   const [projectedPins, setProjectedPins] = useState<ProjectedPin[]>([]);
@@ -578,7 +589,7 @@ export default function HeadsetExperience({
       activeComponentRef.current = SECTION_KEYFRAMES[roundedIdx]?.componentId || null;
 
       // In RTL layout on desktop/tablet, mirror the horizontal X offset!
-      const rtlMultiplier = isRtl ? -1 : 1;
+      const rtlMultiplier = isRtlRef.current ? -1 : 1;
       const rawPosX1 = kf1.posX(mob, tab);
       const rawPosX2 = kf2.posX(mob, tab);
 
@@ -590,7 +601,7 @@ export default function HeadsetExperience({
       let targetRotY = THREE.MathUtils.lerp(kf1.rotY, kf2.rotY, frac);
       let targetRotZ = THREE.MathUtils.lerp(kf1.rotZ, kf2.rotZ, frac);
 
-      if (autoRotate) {
+      if (autoRotateRef.current) {
         // 360 Turntable Mode
         targetPosX = 0;
         targetPosY = mob ? 3.8 : 0;
@@ -692,9 +703,7 @@ export default function HeadsetExperience({
       renderer.dispose();
       dracoLoader.dispose();
     };
-  }, [onLoaded, autoRotate, activeColor, isRtl]);
-
-  const isMobileScreen = typeof window !== "undefined" && window.innerWidth < 640;
+  }, [onLoaded]);
 
   return (
     <div
@@ -758,20 +767,13 @@ export default function HeadsetExperience({
 
               {/* Callout Tag (Adapts gracefully on mobile vs desktop) */}
               <div
-                className={`absolute ${
-                  isMobileScreen
-                    ? "bottom-8 left-1/2 -translate-x-1/2 text-center"
-                    : isRtl
-                    ? "right-9 text-right"
-                    : "left-9 text-left"
-                } flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-900 text-white text-[11px] tracking-tight whitespace-nowrap shadow-xl transition-all duration-200 pointer-events-none ${
+                className={`absolute bottom-8 left-1/2 -translate-x-1/2 text-center sm:bottom-auto sm:left-auto sm:top-1/2 sm:-translate-y-1/2 sm:start-9 sm:text-start flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-900 text-white text-[11px] tracking-tight whitespace-nowrap shadow-xl transition-all duration-200 pointer-events-none ${
                   isActive
-                    ? "opacity-100 translate-x-0 ring-1 ring-white/20"
+                    ? "opacity-100 ring-1 ring-white/20"
                     : "opacity-0 group-hover:opacity-100"
                 }`}
                 style={{
-                  borderInlineStart: isMobileScreen ? "none" : `3px solid ${activeColor.dotHex}`,
-                  borderBottom: isMobileScreen ? `2px solid ${activeColor.dotHex}` : "none",
+                  borderInlineStart: `3px solid ${activeColor.dotHex}`,
                 }}
               >
                 <div className="flex flex-col">

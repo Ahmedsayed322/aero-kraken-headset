@@ -233,9 +233,9 @@ export default function Home() {
       {/* Stage 0: Hero Section (Model in upper screen on mobile, content in lower card) */}
       <section
         id="hero"
-        className="min-h-screen w-full flex flex-col justify-end sm:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pt-16 sm:pt-24 pb-20 sm:pb-8"
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pt-16 sm:pt-24 pb-20 md:pb-8"
       >
-        <div className="w-full max-w-xl pointer-events-auto bg-white/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-5 sm:p-0 rounded-3xl sm:rounded-none border border-neutral-200/80 sm:border-none shadow-xl sm:shadow-none mb-2 sm:mb-0">
+        <div className="w-full max-w-xl text-start pointer-events-auto bg-white/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none p-5 sm:p-7 md:p-0 rounded-3xl md:rounded-none border border-neutral-200/80 md:border-none shadow-xl md:shadow-none mb-2 md:mb-0">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 text-white text-[11px] sm:text-xs font-semibold tracking-tight mb-2.5 sm:mb-4 shadow-xs">
             <span
@@ -306,11 +306,9 @@ export default function Home() {
       {/* Stage 1: 50mm Acoustic Drivers Section */}
       <section
         id="section-drivers"
-        className={`min-h-screen w-full flex flex-col justify-end sm:justify-center ${
-          isRtl ? "sm:items-start" : "sm:items-end"
-        } relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-8 pt-12`}
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 sm:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -358,11 +356,9 @@ export default function Home() {
       {/* Stage 2: Thermal Cooling Gel Section */}
       <section
         id="section-cushions"
-        className={`min-h-screen w-full flex flex-col justify-end sm:justify-center ${
-          isRtl ? "sm:items-end" : "sm:items-start"
-        } relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-8 pt-12`}
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 sm:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -410,11 +406,9 @@ export default function Home() {
       {/* Stage 3: Bauxite Aluminum Headband Section */}
       <section
         id="section-headband"
-        className={`min-h-screen w-full flex flex-col justify-end sm:justify-center ${
-          isRtl ? "sm:items-start" : "sm:items-end"
-        } relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-8 pt-12`}
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 sm:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -462,11 +456,9 @@ export default function Home() {
       {/* Stage 4: Retractable Microphone Section */}
       <section
         id="section-mic"
-        className={`min-h-screen w-full flex flex-col justify-end sm:justify-center ${
-          isRtl ? "sm:items-end" : "sm:items-start"
-        } relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-8 pt-12`}
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 sm:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -514,11 +506,9 @@ export default function Home() {
       {/* Stage 5: Tactile Controls Section */}
       <section
         id="section-controls"
-        className={`min-h-screen w-full flex flex-col justify-end sm:justify-center ${
-          isRtl ? "sm:items-start" : "sm:items-end"
-        } relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 lg:px-20 pb-20 sm:pb-8 pt-12`}
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-end relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-lg text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 sm:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
@@ -566,9 +556,9 @@ export default function Home() {
       {/* Stage 6: Finale Section */}
       <section
         id="section-finale"
-        className="min-h-screen w-full flex flex-col justify-end sm:justify-center items-center text-center relative z-20 pointer-events-none px-4 sm:px-10 md:px-16 pb-20 sm:pb-8 pt-12"
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-center text-center relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-2xl pointer-events-auto bg-white/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none p-6 sm:p-0 rounded-3xl sm:rounded-none border border-neutral-200/80 sm:border-none shadow-xl sm:shadow-none mb-2 sm:mb-0">
+        <div className="w-full max-w-2xl pointer-events-auto bg-white/92 md:bg-white/85 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
             className="text-xs font-bold uppercase tracking-widest block mb-2 sm:mb-3"
             style={{ color: activeColor.dotHex }}
