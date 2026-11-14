@@ -556,18 +556,18 @@ export default function Home() {
       {/* Stage 6: Finale Section */}
       <section
         id="section-finale"
-        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-center text-center relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 pb-20 md:pb-8 pt-12"
+        className="min-h-screen w-full flex flex-col justify-end md:justify-center items-start relative z-20 pointer-events-none px-4 sm:px-8 md:px-12 lg:px-20 xl:px-28 pb-20 md:pb-8 pt-12"
       >
-        <div className="w-full max-w-2xl pointer-events-auto bg-white/92 md:bg-white/85 backdrop-blur-md p-6 sm:p-8 md:p-10 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
+        <div className="w-full max-w-lg md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] text-start pointer-events-auto bg-white/92 backdrop-blur-md p-5 sm:p-7 lg:p-8 rounded-3xl border border-neutral-200/80 shadow-xl mb-2 md:mb-0">
           <span
-            className="text-xs font-bold uppercase tracking-widest block mb-2 sm:mb-3"
+            className="text-xs font-bold uppercase tracking-widest block mb-1.5 sm:mb-2"
             style={{ color: activeColor.dotHex }}
           >
             {t.sections.finale.badge}
           </span>
 
           <h2
-            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase font-display mb-3 sm:mb-4 text-neutral-950 ${
+            className={`text-2xl sm:text-4xl md:text-5xl font-black uppercase font-display mb-2.5 sm:mb-3 text-neutral-950 ${
               isRtl ? "leading-[1.18] tracking-normal" : "leading-[1.05] tracking-tight"
             }`}
           >
@@ -575,25 +575,25 @@ export default function Home() {
             <span style={{ color: activeColor.dotHex }}>{t.sections.finale.titleHighlight}</span>
           </h2>
 
-          <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed max-w-lg mx-auto mb-4 sm:mb-6">
+          <p className="text-xs sm:text-base text-neutral-600 font-normal leading-relaxed mb-4 sm:mb-6">
             {t.sections.finale.description}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={handleAcquireClick}
-              className="px-6 py-3 sm:px-7 sm:py-3.5 rounded-full text-white text-xs font-bold tracking-widest uppercase transition-all shadow-xl hover:opacity-95"
+              className="flex items-center gap-1.5 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full text-white text-xs font-bold tracking-widest uppercase transition-all shadow-xl hover:opacity-95"
               style={{ backgroundColor: activeColor.dotHex }}
             >
-              {t.sections.finale.ctaBtn}
+              <span>{t.sections.finale.ctaBtn}</span>
             </button>
             <button
               type="button"
               onClick={() => scrollToSection("hero")}
-              className="px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-white text-neutral-900 border border-neutral-300 text-xs font-bold tracking-widest uppercase hover:border-neutral-500 transition-all shadow-xs"
+              className="flex items-center gap-1.5 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white text-neutral-900 border border-neutral-300 text-xs font-bold tracking-widest uppercase hover:border-neutral-500 transition-all shadow-xs"
             >
-              {t.sections.finale.topBtn}
+              <span>{t.sections.finale.topBtn}</span>
             </button>
           </div>
         </div>

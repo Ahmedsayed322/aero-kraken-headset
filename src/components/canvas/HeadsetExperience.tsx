@@ -116,12 +116,12 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
     id: "section-finale",
     componentId: null,
     camDist: 44,
-    posX: () => 0,
-    posY: (mob) => (mob ? 3.8 : 0),
+    posX: (mob, tab) => (mob ? 0 : tab ? 5.0 : 8.0),
+    posY: (mob) => (mob ? 3.6 : -0.2),
     posZ: 0,
-    rotX: 0.1,
-    rotY: 0.15,
-    rotZ: 0,
+    rotX: 0.12,
+    rotY: -0.65,
+    rotZ: -0.05,
   },
 ];
 
