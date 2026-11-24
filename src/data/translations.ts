@@ -104,7 +104,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   ar: {
     brand: {
-      name: "إيرو كراكن",
+      name: "إيرو أبيكس",
       tagline: "إضاءة كروما RGB",
       audioPlaying: "صوت الاستوديو يعمل",
       audioPaused: "تشغيل صوت الاستوديو",
@@ -213,7 +213,7 @@ export const translations: Record<Language, Translations> = {
     modal: {
       officialRig: "عتاد البطولات الرسمي",
       configureTitle: "تخصيص نسختك",
-      subtitle: "إيرو كراكن — إصدار المحترفين 50 مم",
+      subtitle: "إيرو أبيكس — إصدار المحترفين 50 مم",
       colorLabel: "إصدار إضاءة كروما RGB",
       engravingLabel: "نقش الاسم بالليزر (مجانًا)",
       engravingPlaceholder: "اكتب اسمك أو لقبك هنا",
@@ -224,7 +224,7 @@ export const translations: Record<Language, Translations> = {
       confirmedBadge: "تم تأكيد طلبك بنجاح",
       confirmedTitle: "جاهز للمنافسة",
       confirmedDesc: (color: string, engraving: string) =>
-        `تم تأكيد حجز سماعة إيرو كراكن بإضاءة ${color} مع نقش الليزر الخاص "${engraving}".`,
+        `تم تأكيد حجز سماعة إيرو أبيكس بإضاءة ${color} مع نقش الليزر الخاص "${engraving}".`,
       returnBtn: "العودة للتجربة",
     },
     quickNav: {
@@ -237,7 +237,7 @@ export const translations: Record<Language, Translations> = {
   },
   en: {
     brand: {
-      name: "Aero Kraken",
+      name: "Aero Apex",
       tagline: "Chroma RGB",
       audioPlaying: "Studio Audio Playing",
       audioPaused: "Play Studio Audio",
@@ -346,7 +346,7 @@ export const translations: Record<Language, Translations> = {
     modal: {
       officialRig: "Official Tournament Rig",
       configureTitle: "Configure Your Rig",
-      subtitle: "Aero Kraken 50mm Pro Edition",
+      subtitle: "Aero Apex 50mm Pro Edition",
       colorLabel: "Chroma RGB Lighting Edition",
       engravingLabel: "Laser Engraved Call-Sign (Free)",
       engravingPlaceholder: "ENTER CALL-SIGN",
@@ -357,7 +357,7 @@ export const translations: Record<Language, Translations> = {
       confirmedBadge: "Order Confirmed",
       confirmedTitle: "Ready For Battle",
       confirmedDesc: (color: string, engraving: string) =>
-        `Your Aero Kraken tournament edition with ${color} Chroma lighting and custom engraving "${engraving}" is reserved.`,
+        `Your Aero Apex tournament edition with ${color} Chroma lighting and custom engraving "${engraving}" is reserved.`,
       returnBtn: "Return to Experience",
     },
     quickNav: {

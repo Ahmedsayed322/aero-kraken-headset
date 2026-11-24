@@ -74,7 +74,7 @@ export default function Preloader({ isLoaded }: PreloaderProps) {
 
         <div className="text-center space-y-1.5">
           <h2 className="font-mono text-sm font-bold tracking-widest uppercase text-black">
-            AERO // KRAKEN EXPERIENCE
+            AERO // APEX EXPERIENCE
           </h2>
           <p className="font-mono text-[11px] text-black/50 tracking-wider">
             Compiling 3D Acoustic Geometry & PBR Shaders

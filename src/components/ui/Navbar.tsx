@@ -61,12 +61,12 @@ export default function Navbar({
             className="flex items-center gap-2.5 text-black hover:opacity-90 transition-opacity group"
           >
             <div className="w-8 h-8 rounded-sm bg-[#151515] flex items-center justify-center text-white font-mono font-bold text-xs relative overflow-hidden group-hover:bg-[#E52432] transition-colors">
-              <span className="relative z-10">AK</span>
+              <span className="relative z-10">AA</span>
               <div className="absolute top-0 right-0 w-2 h-2 bg-[#E52432] group-hover:bg-white" />
             </div>
             <div className="flex flex-col">
               <span className="font-mono text-xs font-black tracking-widest uppercase flex items-center gap-1.5">
-                AERO <span className="text-[#E52432] font-black">//</span> KRAKEN
+                AERO <span className="text-[#E52432] font-black">//</span> APEX
               </span>
               <span className="text-[9px] font-mono tracking-wider text-black/50 uppercase">
                 Acoustic System

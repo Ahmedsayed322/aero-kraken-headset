@@ -133,7 +133,7 @@ export default function FinalCtaSection({
       <footer className="w-full max-w-7xl mx-auto px-6 md:px-12 pt-16 border-t border-black/8 mt-16 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-mono text-black/50">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 bg-[#E52432] rounded-xs" />
-          <span className="font-bold text-black">AERO // KRAKEN EXPERIENCE</span>
+          <span className="font-bold text-black">AERO // APEX EXPERIENCE</span>
           <span>© 2026. All rights reserved.</span>
         </div>
 

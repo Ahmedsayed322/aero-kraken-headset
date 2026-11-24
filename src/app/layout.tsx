@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Aero Kraken — إيرو كراكن | Tournament-Grade 3D Gaming Headset",
+  title: "Aero Apex — إيرو أبيكس | Tournament-Grade 3D Gaming Headset",
   description:
     "Hear Beyond Limits. Custom-tuned 50mm neodymium acoustic drivers, cooling-gel memory foam, and bauxite aluminum chassis. اسمع ما وراء الحدود.",
 };

@@ -92,13 +92,13 @@ export const COLOR_EDITIONS: ColorEdition[] = [
     taglineAr: "شعار كروما بلون أبيض ناصع مع مظهر متخفٍ فائق الأناقة.",
   },
   {
-    id: "razer-green",
-    name: "Chroma Green",
-    nameAr: "أخضر كروما الأيقوني",
+    id: "apex-emerald",
+    name: "Apex Emerald",
+    nameAr: "الأخضر الزمردي",
     dotHex: "#00FF41",
     emissiveHex: "#00FF41",
-    tagline: "Iconic electric Razer green emblem with high-contrast LED illumination.",
-    taglineAr: "إضاءة ليد كروما خضراء كهربائية أيقونية بتباين شديد الوضوح.",
+    tagline: "High-voltage electric emerald Apex emblem with high-contrast LED illumination.",
+    taglineAr: "إضاءة ليد كروما زمردية كهربائية لشعار أبيكس بتباين فائق الوضوح.",
   },
   {
     id: "glacier-cyan",

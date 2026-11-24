@@ -105,7 +105,7 @@ export const COLORWAYS: Colorway[] = [
   },
   {
     id: "cyber-green",
-    name: "Razer Chroma Green",
+    name: "Apex Emerald Green",
     hex: "#00FF41",
     accentHex: "#26FF63",
     description: "Vibrant high-contrast esports electric green illumination.",

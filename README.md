@@ -1,8 +1,8 @@
-# Aero Kraken — 3D Tournament Gaming Headset Experience 🎧
+# Aero Apex — 3D Tournament Gaming Headset Experience 🎧
 
 An ultra-premium, interactive 3D product showcase for a tournament-grade gaming headset, built with **Next.js 16**, **React 19**, **Three.js**, and **Tailwind CSS**.
 
-![Aero Kraken Preview](https://github.com/Ahmedsayed322/aero-kraken-headset/raw/main/public/file.svg)
+![Aero Apex Preview](https://github.com/Ahmedsayed322/aero-kraken-headset/raw/main/public/file.svg)
 
 ---
 

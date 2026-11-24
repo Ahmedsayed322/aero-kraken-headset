@@ -66,7 +66,7 @@ export default function OrderModal({
               WELCOME TO THE ARENA
             </h3>
             <p className="text-sm text-black/70 max-w-sm mx-auto leading-relaxed">
-              Your <strong>AERO // KRAKEN</strong> in{" "}
+              Your <strong>AERO // APEX</strong> in{" "}
               <span className="text-[#E52432] font-bold">{activeColorway.name}</span> has
               been queued for priority dispatch with express tracking.
             </p>
@@ -90,7 +90,7 @@ export default function OrderModal({
               CONFIGURE YOUR HEADSET
             </h3>
             <p className="font-mono text-xs text-black/50 mb-6">
-              AERO // KRAKEN — Model No. RZ-2026-X
+              AERO // APEX — Model No. APEX-2026-PRO
             </p>
 
             {/* Select Colorway */}
@@ -132,7 +132,7 @@ export default function OrderModal({
             <div className="bg-[#F4F4F4] rounded-2xl p-4 mb-6 border border-black/5 text-xs font-mono space-y-1.5">
               <div className="font-bold text-black uppercase mb-1">Included in Package:</div>
               <div className="text-black/70 flex items-center gap-2">
-                <Check className="w-3 h-3 text-[#E52432]" /> Aero Kraken 50mm Headset
+                <Check className="w-3 h-3 text-[#E52432]" /> Aero Apex 50mm Headset
               </div>
               <div className="text-black/70 flex items-center gap-2">
                 <Check className="w-3 h-3 text-[#E52432]" /> 1.3m Kevlar Braided 3.5mm Cable

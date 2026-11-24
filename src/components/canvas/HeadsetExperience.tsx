@@ -125,6 +125,65 @@ const SECTION_KEYFRAMES: StageKeyframe[] = [
   },
 ];
 
+// Generates the custom, original Aero Apex illuminated Chroma emblem texture
+function createApexEmblemTexture(): THREE.CanvasTexture {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return new THREE.CanvasTexture(canvas);
+
+  ctx.clearRect(0, 0, 512, 512);
+
+  // Outer illuminated circular ring
+  ctx.beginPath();
+  ctx.arc(256, 256, 230, 0, Math.PI * 2);
+  ctx.lineWidth = 14;
+  ctx.strokeStyle = "#ffffff";
+  ctx.stroke();
+
+  // Subtle inner accent ring
+  ctx.beginPath();
+  ctx.arc(256, 256, 206, 0, Math.PI * 2);
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "#ffffff";
+  ctx.stroke();
+
+  // Apex Chevron / Wings Emblem
+  ctx.fillStyle = "#ffffff";
+
+  // Left aerodynamic wing
+  ctx.beginPath();
+  ctx.moveTo(256, 85);
+  ctx.lineTo(125, 365);
+  ctx.lineTo(185, 365);
+  ctx.lineTo(256, 205);
+  ctx.closePath();
+  ctx.fill();
+
+  // Right aerodynamic wing
+  ctx.beginPath();
+  ctx.moveTo(256, 85);
+  ctx.lineTo(387, 365);
+  ctx.lineTo(327, 365);
+  ctx.lineTo(256, 205);
+  ctx.closePath();
+  ctx.fill();
+
+  // Center glowing energy diamond
+  ctx.beginPath();
+  ctx.moveTo(256, 238);
+  ctx.lineTo(292, 308);
+  ctx.lineTo(256, 378);
+  ctx.lineTo(220, 308);
+  ctx.closePath();
+  ctx.fill();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+}
+
 export default function HeadsetExperience({
   onPinClick,
   activeColor,
@@ -378,6 +437,150 @@ export default function HeadsetExperience({
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
 
+    const processHeadsetScene = (root: THREE.Group) => {
+      bodyMeshesRef.current = [];
+      logoMeshesRef.current = [];
+
+      root.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          const name = child.name;
+          const nameLower = name.toLowerCase();
+          const matName = child.material?.name?.toLowerCase() || "";
+
+          // Hide stand meshes (base, stand arm, base logo)
+          child.geometry.computeBoundingBox();
+          const bb = child.geometry.boundingBox;
+          const isStandMesh = (bb && bb.min.y < 4.0) || nameLower.includes("stand");
+
+          if (isStandMesh) {
+            child.visible = false;
+            return;
+          }
+
+          // 1. Hide original logo meshes
+          const isOriginalLogo =
+            name === "Logo" ||
+            matName.includes("mat.6") ||
+            name === "Rounding_1" ||
+            name === "Rounding_2" ||
+            name === "Cap_1_2" ||
+            name === "Cap_2_2";
+
+          if (isOriginalLogo) {
+            child.visible = false;
+            return;
+          }
+
+          // 2. Headband Leather (Textured)
+          if (nameLower.includes("top_band") || matName.includes("coarse_leather")) {
+            child.material = new THREE.MeshStandardMaterial({
+              map: leatherDiff,
+              normalMap: leatherNrm,
+              normalScale: new THREE.Vector2(1.0, 1.0),
+              color: 0x1c1c1c,
+              metalness: 0.05,
+              roughness: 0.58,
+            });
+          }
+          // 3. Ear Cushion & Inner Band Foam (Textured)
+          else if (
+            nameLower.includes("cushon") ||
+            nameLower.includes("band_cushon") ||
+            matName.includes("carbon_weave")
+          ) {
+            child.material = new THREE.MeshStandardMaterial({
+              map: foamTex,
+              color: 0x222222,
+              roughness: 0.88,
+              metalness: 0.04,
+            });
+          }
+          // 4. Chrome Screws & Metal Pivot Details
+          else if (
+            matName.includes("chrome") ||
+            name === "Cap_1_1" ||
+            name === "Cap_2_1"
+          ) {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0xe0e0e0,
+              metalness: 0.98,
+              roughness: 0.12,
+            });
+          }
+          // 5. Central Earcup Caps (Tournament Matte Deep Black)
+          else if (name === "Central_part" || name === "Center_part_rim") {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0x141414,
+              metalness: 0.35,
+              roughness: 0.35,
+            });
+            bodyMeshesRef.current.push(child);
+          }
+          // 6. Acoustic Honeycomb Grille
+          else if (nameLower.includes("mesh")) {
+            child.material = new THREE.MeshStandardMaterial({
+              color: 0x181818,
+              metalness: 0.85,
+              roughness: 0.28,
+            });
+          }
+          // 7. Headset Body Chassis (Tournament matte black finish)
+          else {
+            child.material = new THREE.MeshStandardMaterial({
+              color: new THREE.Color(0x151515),
+              metalness: 0.22,
+              roughness: 0.38,
+            });
+            bodyMeshesRef.current.push(child);
+          }
+        }
+      });
+
+      // Attach original Aero Apex Illuminated Chroma Emblems to left and right earcups
+      const apexTex = createApexEmblemTexture();
+      const emblemRadius = 1.95;
+      const emblemGeo = new THREE.PlaneGeometry(emblemRadius * 2, emblemRadius * 2);
+
+      const createEmblemMat = () =>
+        new THREE.MeshStandardMaterial({
+          color: 0x050505,
+          emissive: new THREE.Color(activeColor.emissiveHex),
+          emissiveMap: apexTex,
+          emissiveIntensity: 5.5,
+          alphaMap: apexTex,
+          transparent: true,
+          roughness: 0.15,
+          metalness: 0.05,
+          depthWrite: false,
+          polygonOffset: true,
+          polygonOffsetFactor: -1,
+          polygonOffsetUnits: -1,
+          side: THREE.DoubleSide,
+        });
+
+      // Left earcup emblem
+      const leftEmblemMat = createEmblemMat();
+      const leftEmblem = new THREE.Mesh(emblemGeo, leftEmblemMat);
+      leftEmblem.name = "ApexLogo_Left";
+      const leftNormal = new THREE.Vector3(-0.9835, -0.1807, 0).normalize();
+      const leftPos = new THREE.Vector3(-7.95, 8.85, 2.94).add(leftNormal.clone().multiplyScalar(0.08));
+      leftEmblem.position.copy(leftPos);
+      leftEmblem.lookAt(leftPos.clone().add(leftNormal));
+      root.add(leftEmblem);
+      logoMeshesRef.current.push(leftEmblem);
+
+      // Right earcup emblem
+      const rightEmblemMat = createEmblemMat();
+      const rightEmblem = new THREE.Mesh(emblemGeo, rightEmblemMat);
+      rightEmblem.name = "ApexLogo_Right";
+      const rightNormal = new THREE.Vector3(0.9835, -0.1807, 0).normalize();
+      const rightPos = new THREE.Vector3(7.95, 8.85, 2.94).add(rightNormal.clone().multiplyScalar(0.08));
+      rightEmblem.position.copy(rightPos);
+      rightEmblem.lookAt(rightPos.clone().add(rightNormal));
+      root.add(rightEmblem);
+      logoMeshesRef.current.push(rightEmblem);
+    };
+
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
 
@@ -386,103 +589,7 @@ export default function HeadsetExperience({
       (gltf) => {
         const root = gltf.scene;
         root.position.set(0, -12.2, -4.53);
-
-        bodyMeshesRef.current = [];
-        logoMeshesRef.current = [];
-
-        root.traverse((child) => {
-          if (child instanceof THREE.Mesh) {
-            const name = child.name;
-            const nameLower = name.toLowerCase();
-            const matName = child.material?.name?.toLowerCase() || "";
-
-            // Hide stand meshes (base, stand arm, base logo)
-            child.geometry.computeBoundingBox();
-            const bb = child.geometry.boundingBox;
-            const isStandMesh = (bb && bb.min.y < 4.0) || nameLower.includes("stand");
-
-            if (isStandMesh) {
-              child.visible = false;
-              return;
-            }
-
-            // 1. EAR-CUP LOGO & CHROMA ILLUMINATION (Checked first so nothing steals it)
-            const isLogoPart =
-              name === "Logo" ||
-              matName.includes("mat.6") ||
-              name === "Rounding_1" ||
-              name === "Rounding_2" ||
-              name === "Cap_1_2" ||
-              name === "Cap_2_2";
-
-            if (isLogoPart) {
-              const emissiveCol = new THREE.Color(activeColor.emissiveHex);
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0x111111,
-                emissive: emissiveCol,
-                emissiveIntensity: 4.8,
-                metalness: 0.1,
-                roughness: 0.2,
-              });
-              logoMeshesRef.current.push(child);
-            }
-            // 2. Headband Leather (Textured)
-            else if (nameLower.includes("top_band") || matName.includes("coarse_leather")) {
-              child.material = new THREE.MeshStandardMaterial({
-                map: leatherDiff,
-                normalMap: leatherNrm,
-                normalScale: new THREE.Vector2(1.0, 1.0),
-                color: 0x1c1c1c,
-                metalness: 0.05,
-                roughness: 0.58,
-              });
-            }
-            // 3. Ear Cushion & Inner Band Foam (Textured)
-            else if (
-              nameLower.includes("cushon") ||
-              nameLower.includes("band_cushon") ||
-              matName.includes("carbon_weave")
-            ) {
-              child.material = new THREE.MeshStandardMaterial({
-                map: foamTex,
-                color: 0x222222,
-                roughness: 0.88,
-                metalness: 0.04,
-              });
-            }
-            // 4. Chrome Screws & Metal Pivot Details
-            else if (
-              matName.includes("chrome") ||
-              name === "Cap_1_1" ||
-              name === "Cap_2_1" ||
-              name === "Central_part"
-            ) {
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0xe0e0e0,
-                metalness: 0.98,
-                roughness: 0.12,
-              });
-            }
-            // 5. Acoustic Honeycomb Grille
-            else if (nameLower.includes("mesh")) {
-              child.material = new THREE.MeshStandardMaterial({
-                color: 0x181818,
-                metalness: 0.85,
-                roughness: 0.28,
-              });
-            }
-            // 6. Headset Body Chassis (Tournament matte black finish)
-            else {
-              child.material = new THREE.MeshStandardMaterial({
-                color: new THREE.Color(0x151515),
-                metalness: 0.22,
-                roughness: 0.38,
-              });
-              bodyMeshesRef.current.push(child);
-            }
-          }
-        });
-
+        processHeadsetScene(root);
         modelGroup.add(root);
         onLoaded();
       },
@@ -492,6 +599,7 @@ export default function HeadsetExperience({
         gltfLoader.load("/models/headset_uncompressed.glb", (gltf) => {
           const root = gltf.scene;
           root.position.set(0, -12.2, -4.53);
+          processHeadsetScene(root);
           modelGroup.add(root);
           onLoaded();
         });

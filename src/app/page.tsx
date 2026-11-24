@@ -94,7 +94,7 @@ export default function Home() {
               className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center text-white font-bold text-xs shadow-sm transition-transform group-hover:scale-105"
               style={{ backgroundColor: activeColor.dotHex }}
             >
-              AK
+              AA
             </div>
             <div className="flex flex-col">
               <span className="text-xs sm:text-sm font-extrabold tracking-tight text-neutral-900 uppercase">
